@@ -112,7 +112,7 @@ If the generated WebP or AVIF image is larger than the original image, the defau
 
 ## Disable WebP/AVIF images serving
 
-If for some reason you want to disable WebP file serving via the HTML `<picture>` tag, you can do it per widget settings:
+If for some reason you want to disable WebP/AVIF file serving via the HTML `<picture>` tag, you can do it per widget settings:
 
 ```php
 <?= \PELock\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Extra product", "disable" => true ]) ?>
