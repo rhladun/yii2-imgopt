@@ -1,15 +1,14 @@
 {
-    "name": "pelock/yii2-imgopt",
+    "name": "rhladun/yii2-imgopt",
     "version": "1.3.0",
-    "description": "Image optimization widget for Yii2 Framework with auto WebP/AVIF image format generation from PNG/JPG files.",
+    "description": "Image widget with an auto WebP/AVIF files generation for Yii2 Framework. Generate HTML <picture>/<img> tags or plain CSS style (background-image) for WebP/AVIF formats (with ability create resized copies) and fallback PNG or JPG images. ",
     "type": "yii2-extension",
-    "keywords": ["image", "optimization", "yii2", "webp", "avif", "jpg", "png", "generator"],
+    "keywords": ["image", "optimization", "yii2", "webp", "avif", "jpg", "jpeg", "png", "generator", "auto resize images", "optimization background images"],
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "Bartosz Wójcik",
-            "email": "support@pelock.com",
-            "homepage": "https://www.pelock.com"
+            "name": "Roman Hladun",
+            "email": "intsysdesign@dmail.com"
         }
     ],
     "require": {
@@ -18,7 +17,7 @@
     },
     "autoload": {
             "psr-4": {
-                    "PELock\\ImgOpt\\": "src/"
+                    "rhladun\\ImgOpt\\": "src/"
             }
     }
 }
