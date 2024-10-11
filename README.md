@@ -47,14 +47,13 @@ The browser will pick up the best source for the provided image, and thanks to r
 [Lazy images loading](https://web.dev/browser-level-image-lazy-loading/) makes the browser load the images when it reach a certain point, after which the image became visible in the current browser tab. You can use this pure HTML feature (no JS involved) from within the widget:
 
 ```php
-<?= \PELock\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "loading" => "lazy" ]) ?>
+<?= \rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "type_src"=>"picture_webp", "loading" => "lazy" ]) ?>
 ```
 
 The generated output looks like this:
 
 ```html
 <picture>
-    <source type="image/avif" srcset="/images/product/extra.avif">
     <source type="image/webp" srcset="/images/product/extra.webp">
     <img src="/images/product/extra.png" loading="lazy">
 </picture>
