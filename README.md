@@ -62,11 +62,15 @@ The generated output looks like this:
 
 Use it to make your website loading times even faster.
 
-## AVIF image generation (new in v1.3.0)
+## AVIF image generation
 
-ImgOpt will automatically generate AVIF file if it's supported by the existing PHP installation. If the conversion function is not available, it will just skip this step.
+ImgOpt will automatically generate AVIF file (when `type_src` param has value picture_avif/srcset_avif/background_avif) if it's supported by the existing PHP installation. If the conversion function is not available, it will just skip this step.
 
-## Automatic WebP generation for updated images (new in v1.2.0)
+PHP has had AVIF support in its GD extension since PHP version 8.1
+
+Noticed that the generation time of an AVIF picture is slightly longer than that of WebP.
+
+## Automatic WebP/AVIF generation for updated images
 
 ImgOpt will set the modification date of the generated WebP image to match the modification date of the original image file.
 
@@ -79,13 +83,13 @@ The preferred way to install the library is through the [composer](https://getco
 Run:
 
 ```
-php composer.phar require --prefer-dist pelock/yii2-imgopt "*"
+php composer.phar require --prefer-dist rhladun/yii2-imgopt "*"
 ```
 
 Or add:
 
 ```
-"pelock/yii2-imgopt": "*"
+"rhladun/yii2-imgopt": "*"
 ```
 
 to the`require` section within your `composer.json` config file.
@@ -96,14 +100,14 @@ Source code is available at [https://github.com/rhladun/yii2-imgopt](https://git
 
 ## Image quality
 
-I knew you would ask about it! By default the conversion tries all the steps from 100% output image quality down to 70% to generate the WebP file that is smaller than the original image.
+By default the conversion tries all the steps from 100% output image quality down to 70% to generate the WebP file that is smaller than the original image.
 
 ## Disable WebP/AVIF images serving
 
-If for some reason you want to disable WebP/AVIF file serving via the HTML `<picture>` tag, you can do it per widget settings:
+If for some reason you want to disable WebP/AVIF file serving, you can do it per widget settings:
 
 ```php
-<?= \PELock\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Extra product", "disable" => true ]) ?>
+<?= \rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Extra product", 'type_src'=>'srcset_webp', "disable" => true ]) ?>
 ```
 
 ## Recreate WebP/AVIF files
@@ -113,7 +117,7 @@ The widget code automatically detects if there's a WebP/AVIF images in the direc
 If you wish to force the widget code to recreate it anyway, pass the special param to the widget code:
 
 ```php
-<?= \PELock\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Extra product", "recreate" => true ]) ?>
+<?= \rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Extra product", "type_src"=>"picture_avif", "recreate" => true ]) ?>
 ```
 
 You might want to recreate all of the WebP and AVIF files and to do that without modifying, change the widget source code from:
