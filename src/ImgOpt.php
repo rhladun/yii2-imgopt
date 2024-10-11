@@ -18,9 +18,8 @@ use yii\helpers\Html;
  * <img src="/images/product/extra.png" alt="Extra product">
  * ```
  *
- * It will generate an extra WebP & AVIF image files (in the same directory the provided
- * image is located) and serve it to your browser in HTML code, with a default
- * fallback to the original image for browsers that doesn't support WebP/AVIF images.
+ * It will generate an extra WebP & AVIF image files (which will save in the corresponding directory $_path, relative to the directory of the parent file.)
+ * and will return HTML code (according to the specified type $type_src [picture_webp/picture_avif/srcset_webp/srcset_avif/background_webp/background_avif])
  *
  * Replace your IMG tag within your templates with a call to:
  *
@@ -56,7 +55,7 @@ use yii\helpers\Html;
   * ```
  *
  * @property string $src image source relative to the @webroot Yii2 alias (required)
- * @property string $type_src output format tags picture|srcset_webp|srcset_avif|background_webp|background_avif (required)
+ * @property string $type_src output format tags picture_webp|picture_avif|srcset_webp|srcset_avif|background_webp|background_avif (required)
  * @property string $alt image alternative description used as alt="description" property (optional)
  * @property string $css image class list as a string (can contain multiple classes) used as class="one two three..." (optional)
  * @property string $style image custom CSS styles used as style="one; two; three;..." (optional)
@@ -66,8 +65,7 @@ use yii\helpers\Html;
  * @property string $width width used as width="value" (optional)
  * @property bool $recreate set to TRUE to recreate the WebP file again (optional)
  * @property bool $disable set to TRUE to disable WebP images serving (optional)
- * @property string $_webp_path path to the stored WebP file format, (short path) or null (like "/webp") (optional)
- * @property string $_avif_path path to the stored AVIF file format, (short path) or null (like "/avif") (optional)
+ * @property string $_path path to the stored WebP/AVIF file format, (short path) or null (like "/webp") (optional)
  * @property array auto resize images for specific  dimensions (array or null) (like [576, 768, 992, 1200]) (optional)
  *
  */
@@ -86,12 +84,7 @@ class ImgOpt extends Widget
 	/**
 	 * @var string path to the stored WebP file format, (short path) or null (like "/webp")
 	 */
-	public $_webp_path = "/webp";
-
-	/**
-	 * @var string path to the stored AVIF file format, (short path) or null (like "/avif")
-	 */
-	public $_avif_path = "/avif";
+	public $_path = "/webp";
 
 	/**
 	 * @var array resize images for specific  dimensions (array or []) (like [576, 768, 992, 1200])
@@ -159,16 +152,12 @@ class ImgOpt extends Widget
 	private function get_or_convert_to_dest_format($img, $recreate = false, $resize_width = null)
 	{
 
-		$pre_path = '';
-
 		if (in_array($this->type_src, array('picture_avif', 'srcset_avif', 'background_avif'))) {
 			$file_extension = ".avif";
 			$convertion_function = "imageavif";
-			if ($this->_avif_path) $pre_path = $this->_avif_path;
 		} else {
 			$file_extension = ".webp";
 			$convertion_function = "imagewebp";
-			if ($this->_webp_path) $pre_path = $this->_webp_path;
 		}
 
 
@@ -204,8 +193,8 @@ class ImgOpt extends Widget
 		$file_info = pathinfo($img_full_path);
 
 
-		if (!is_dir($file_info["dirname"].$pre_path)) {
-			mkdir($file_info["dirname"].$pre_path, 0755);
+		if (!is_dir($file_info["dirname"].$this->_path)) {
+			mkdir($file_info["dirname"].$this->_path, 0755);
 		}
 
 		$ext = strtolower($file_info["extension"]);
@@ -221,8 +210,8 @@ class ImgOpt extends Widget
 	 		$output_filename_with_extension = $short_file_info["filename"].'@'.$resize_width.'x'.$resize_height.$file_extension;
 		}
 
-	  	$output_short_path = $short_file_info["dirname"]. $pre_path . "/" . $output_filename_with_extension;
-	  	$output_full_path = $file_info["dirname"]. $pre_path. "/" . $output_filename_with_extension;
+	  	$output_short_path = $short_file_info["dirname"]. $this->_path . "/" . $output_filename_with_extension;
+	  	$output_full_path = $file_info["dirname"]. $this->_path. "/" . $output_filename_with_extension;
 
 		// if the WEBP file already exists check if we want to re-create it
 		if ($recreate === false && file_exists($output_full_path))
