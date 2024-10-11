@@ -6,41 +6,33 @@ Widget forked from [pelock/yii2-imgopt](https://www.yiiframework.com/extension/p
 
 ## How to make my website faster?
 
-A frequent cause of low `PageSpeed ​​Insights` scores is the use of heavy PNG/TGU images, so if you want to optimize image loading, you should use WebP & AVIF image formats. The use of modern formats saves up to 30% of the file size without significant loss of quality.
+A frequent cause of low `PageSpeed ​​Insights` scores is the use of heavy PNG/JPG images, so if you want to optimize image loading, you should use WebP & AVIF image formats. The use of modern formats saves up to 30% of the file size without significant loss of quality.
 
 The automatic image generation process eliminates the need to manually use an image conversion tool, upload new WebP/AVIF images to the server, and update your HTML code.
 
 ## Automate PNG & JPG to WebP & AVIF conversion
 
-I have decided to create a Yii2 widget that would automate this task.
 
-What it does? Instead of static images like this:
-
-```html
-<img src="/images/product/extra.png" alt="Extra product">
-```
-
-it will automatically generate an extra image in new [WebP](https://developers.google.com/speed/webp) format (in the same directory, where the provided image is located) and serve it to your browser in HTML `<picture>` tag, with a default fallback to the original image for browsers that don't support WebP images.
+Widget  will automatically generate an extra image in new WebP/AVIF format (which will save in the corresponding directory $_path (by default `/webp`), relative to the directory of the parent file) and will return HTML code (according to the specified type $type_src `picture_webp / picture_avif / srcset_webp / srcset_avif / background_webp / background_avif`).
 
 Replace your `IMG` tag within your `HTML` templates with a call to:
 
 ```php
-<?= \PELock\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Extra product" ]) ?>
+<?= \rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "type_src"=>"picture_webp", "alt" => "Extra product" ]) ?>
 ```
-
 (Image path is relative to [Yii2 Framework @webroot alias](https://www.yiiframework.com/wiki/667/yii-2-list-of-path-aliases-available-with-default-basic-and-advanced-app))
 
-And once run, the widget code will generate a new WebP & AVIF image files on the fly (original image is left **untouched**) and he following HTML code gets generated:
+And once run, the widget code will generate a new WebP image files on the fly (original image is left **untouched**) and he following HTML code gets generated:
 
 ```html
 <picture>
-    <source type="image/avif" srcset="/images/product/extra.avif">
-    <source type="image/webp" srcset="/images/product/extra.webp">
+    <source type="image/webp" srcset="/images/product/webp/extra.webp">
     <img src="/images/product/extra.png" alt="Extra product">
 </picture>
 ```
-
 The browser will pick up the best source for the provided image, and thanks to revolutionary WebP and AVIF compression, it will make your website loading faster.
+
+
 
 ## Image lazy-loading
 
