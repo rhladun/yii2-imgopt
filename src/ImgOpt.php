@@ -19,7 +19,7 @@ use yii\helpers\Html;
  * ```
  *
  * It will generate an extra WebP & AVIF image files (which will save in the corresponding directory $_path, relative to the directory of the parent file.)
- * and will return HTML code (according to the specified type $type_src [picture_webp/picture_avif/srcset_webp/srcset_avif/background_webp/background_avif])
+ * and will return HTML code (according to the specified type $type_src [picture_webp/picture_avif/img_webp/img_avif/background_webp/background_avif])
  *
  * Replace your IMG tag within your templates with a call to:
  *
@@ -38,7 +38,7 @@ use yii\helpers\Html;
  * ```
  * Example for using for img tag with rezizes 
  * ```php
- *   <?= \rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Image 2", 'type_src'=>'srcset_webp', 'sizes' =>[576, 768, 992]]) ?> 
+ *   <?= \rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Image 2", 'type_src'=>'img_webp', 'sizes' =>[576, 768, 992]]) ?> 
  * ```
  * 
  * ```output html
@@ -55,7 +55,7 @@ use yii\helpers\Html;
   * ```
  *
  * @property string $src image source relative to the @webroot Yii2 alias (required)
- * @property string $type_src output format tags picture_webp|picture_avif|srcset_webp|srcset_avif|background_webp|background_avif (required)
+ * @property string $type_src output format tags picture_webp|picture_avif|img_webp|img_avif|background_webp|background_avif (required)
  * @property string $alt image alternative description used as alt="description" property (optional)
  * @property string $css image class list as a string (can contain multiple classes) used as class="one two three..." (optional)
  * @property string $style image custom CSS styles used as style="one; two; three;..." (optional)
@@ -137,7 +137,7 @@ class ImgOpt extends Widget
 	public $disable = false;
 
 	/**
-	 * @var string picture_webp|picture_avif|srcset_webp|srcset_avif|background_webp|background_avif 
+	 * @var string picture_webp|picture_avif|img_webp|img_avif|background_webp|background_avif 
 	 */
 	public $type_src = 'picture_webp';	
 
@@ -152,7 +152,7 @@ class ImgOpt extends Widget
 	private function get_or_convert_to_dest_format($img, $recreate = false, $resize_width = null)
 	{
 
-		if (in_array($this->type_src, array('picture_avif', 'srcset_avif', 'background_avif'))) {
+		if (in_array($this->type_src, array('picture_avif', 'img_avif', 'background_avif'))) {
 			$file_extension = ".avif";
 			$convertion_function = "imageavif";
 		} else {
@@ -410,8 +410,8 @@ class ImgOpt extends Widget
 		// our unoptimized image (include all the possible attributes)
 		$img = $this->img();
 		switch ($this->type_src) {
-			case 'srcset_webp':
-			case 'srcset_avif':				
+			case 'img_webp':
+			case 'img_avif':				
 				$img = $this->srcset();
 				break;	
 			case 'picture_webp':
