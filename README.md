@@ -32,7 +32,19 @@ And once run, the widget code will generate a new WebP image files on the fly (o
 ```
 The browser will pick up the best source for the provided image, and thanks to revolutionary WebP and AVIF compression, it will make your website loading faster.
 
+Another simple example with the output generation of the AVIF format image saved in a separate directory "/avif".
 
+```php
+<?= \rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "type_src"=>"picture_avif", "_path"=>"/avif" "alt" => "Extra product" ]) ?>
+```
+Output `HTML` result will be
+
+```html
+<picture>
+    <source type="image/avif" srcset="/images/product/avif/extra.avif">
+    <img src="/images/product/extra.png" alt="Extra product">
+</picture>
+```
 
 ## Image lazy-loading
 
@@ -50,14 +62,13 @@ The generated output looks like this:
     <img src="/images/product/extra.png" loading="lazy">
 </picture>
 ```
-
 Use it to make your website loading times even faster.
 
 ## AVIF image generation
 
 ImgOpt will automatically generate AVIF file (when `type_src` param has value picture_avif/srcset_avif/background_avif) if it's supported by the existing PHP installation. If the conversion function is not available, it will just skip this step.
 
-PHP has had AVIF support in its GD extension since PHP version 8.1
+PHP has AVIF support in its GD extension since PHP version 8.1
 
 Noticed that the generation time of an AVIF picture is slightly longer than that of WebP.
 
