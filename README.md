@@ -90,21 +90,13 @@ Or add:
 
 to the`require` section within your `composer.json` config file.
 
-The installation package is available at https://packagist.org/packages/pelock/yii2-imgopt
+The installation package is available at https://packagist.org/packages/rhladun/yii2-imgopt
 
-The Yii2 extension is available at https://www.yiiframework.com/extension/pelock/yii2-imgopt
-
-Source code is available at https://github.com/PELock/yii2-imgopt
+Source code is available at [https://github.com/rhladun/yii2-imgopt](https://github.com/rhladun/yii2-imgopt/)
 
 ## Image quality
 
 I knew you would ask about it! By default the conversion tries all the steps from 100% output image quality down to 70% to generate the WebP file that is smaller than the original image.
-
-| Original PNG (181 kB) | Optimized WebP (60 kB) |
-| --------------------- | -------------- |
-| [![Social Media Bot](https://www.pelock.com/img/media_social_bot.png)](https://www.pelock.com/products/social-media-bot) | [![Social Media Bot](https://www.pelock.com/img/media_social_bot.webp)](https://www.pelock.com/products/social-media-bot/install) |
-
-If the generated WebP or AVIF image is larger than the original image, the default `<img>` tag will be generated.
 
 ## Disable WebP/AVIF images serving
 
