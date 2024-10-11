@@ -22,7 +22,7 @@ Replace your `IMG` tag within your `HTML` templates with a call to:
 ```
 (Image path is relative to [Yii2 Framework @webroot alias](https://www.yiiframework.com/wiki/667/yii-2-list-of-path-aliases-available-with-default-basic-and-advanced-app))
 
-And once run, the widget code will generate a new WebP image files on the fly (original image is left **untouched**) and he following HTML code gets generated:
+And once run, the widget code will generate a new WebP image files on the fly (original image is left **untouched**) and it following HTML code gets generated:
 
 ```html
 <picture>
@@ -42,6 +42,26 @@ Output `HTML` result will be
 ```html
 <picture>
     <source type="image/avif" srcset="/images/product/avif/extra.avif">
+    <img src="/images/product/extra.png" alt="Extra product">
+</picture>
+```
+
+For even greater optimization, it is possible to generate images for different screen widths (for example, for slider images). 
+
+An example auto resize images for specific  dimensions (width: 576, 768, 992 (px)) 
+
+```php
+<?= \rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Extra product", 'type_src'=>'picture_webp', 'sizes' =>[576, 768, 992]]) ?>
+```
+
+Output `HTML` result will be
+
+```html
+<picture>
+    <source type="image/webp" srcset="/images/product/webp/4@576x414.webp" media="(max-width:576px)">
+    <source type="image/webp" srcset="/images/product/webp/4@768x552.webp" media="(max-width:768px)">
+    <source type="image/webp" srcset="/images/product/webp/4@992x713.webp" media="(max-width:992px)">
+    <source type="image/webp" srcset="/images/product/webp/4.webp">
     <img src="/images/product/extra.png" alt="Extra product">
 </picture>
 ```
