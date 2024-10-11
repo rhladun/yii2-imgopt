@@ -6,13 +6,9 @@ Widget forked from [pelock/yii2-imgopt](https://www.yiiframework.com/extension/p
 
 ## How to make my website faster?
 
-[My website](https://www.pelock.com) had all the beautiful images and screenshots, but there was one problem. Most of them were in `PNG` format, some of them weighted around 200 kB. And it adds up to the point where my website loading time was just slow.
+A frequent cause of low `PageSpeed ​​Insights` scores is the use of heavy PNG/TGU images, so if you want to optimize image loading, you should use WebP & AVIF image formats. The use of modern formats saves up to 30% of the file size without significant loss of quality.
 
-I found about the WebP format, read that it's supported in the latest browsers and if it's not (only older Safari browsers), there's a way to overcome this and serve the default `PNG` or `JPG` images. Perfect.
-
-_But_ the entire process would require me to go manually and use some sort of image conversion tool, upload new WebP images to the server and upgrade my `HTML` code.
-
-To hell with that! We can do better!
+The automatic image generation process eliminates the need to manually use an image conversion tool, upload new WebP/AVIF images to the server, and update your HTML code.
 
 ## Automate PNG & JPG to WebP & AVIF conversion
 
