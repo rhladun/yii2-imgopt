@@ -65,6 +65,30 @@ Output `HTML` result will be
     <img src="/images/product/extra.png" alt="Extra product">
 </picture>
 ```
+If you want to use `IMG` html tag, use `"type_src" => "img_webp"`. 
+
+Therefore, according to the previous examples presented:
+
+```php
+ <?=\rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Extra product", 'type_src'=>'img_webp']) ?>   
+```
+Output `HTML` result will be
+
+```html
+<img src="/images/product/extra.png" srcset="/images/product/webp/extra.webp" alt="Extra product">  
+```
+And with resizes:
+
+```php
+<?=\rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png", "alt" => "Extra product", "type_src"=>"img_webp", "sizes" =>[576, 768, 992]]) ?>  
+```
+
+Output `HTML` result will be
+
+```html
+<img src="/images/product/extra.png" srcset="/images/product/webp/extra@576x414.webp 576w,/images/product/webp/extra@768x552.webp 768w,/images/product/webp/extra@992x713.webp 992w,/images/product/webp/extra.webp" alt="Extra product">  
+```
+
 
 ## Image lazy-loading
 
