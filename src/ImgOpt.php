@@ -331,7 +331,7 @@ class ImgOpt extends Widget
 		if (is_null($this->_items)) return null;
 
 		if (sizeof($this->_items)>=1) foreach ($this->_items as $key=>$item) if (!empty($item))  {
-			$srcset[] =  ($key>0) ? $item." ".$key."w" : $item." 10000w";
+			$srcset[] =  ($key>0) ? $item." ".$key."w" : $item;
 		}
 
 		return $this->img(array("srcset" => implode(",", $srcset)));
@@ -365,12 +365,20 @@ class ImgOpt extends Widget
 	private function background() {
 
 		if (is_null($this->_items)) return null;
+		
+		/*
+			CSS 4 Images draft [https://drafts.csswg.org/css-images-4/#image-set-notation] already proposed to introduce width and height units in the future (Like:
 
-		$background_image[] =  "background-image: url('".$this->_items[0]."')";
+		   background-image: image-set(
+    			url("small-landscape-750x536.jpg") 750w,
+    			url("large-landscape-2048x1536.jpg") 20480w);
+			})
+
+			but, so far, modern browsers do not support CSS inline  this functionality, only for media queries in css files.
+			https://dev.to/ingosteinke/responsive-background-images-with-image-set-the-srcset-for-background-image-259a
 
 
 		if (sizeof($this->_items)>1) {
-
 			$webkit_image_set = 'background-image: -webkit-image-set(';
 			$image_set = 'background-image: image-set(';
 
@@ -382,7 +390,10 @@ class ImgOpt extends Widget
 
 			$background_image[] = $webkit_image_set;
 			$background_image[] = $image_set;
-		}
+		} 
+		*/
+
+		$background_image[] = "background-image: image-set(url('".$this->_items[0]."') type('".(($this->type_src=='background_webp') ? "image/webp" : "image/avif")."'), url('".$this->src."'))";
 		return implode('; ', $background_image);
 	}
 
