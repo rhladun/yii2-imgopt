@@ -142,13 +142,13 @@ The preferred way to install the library is through the [composer](https://getco
 Run:
 
 ```
-php composer.phar require --prefer-dist rhladun/yii2-imgopt "*"
+php composer.phar require --prefer-dist rhladun/yii2-imgopt "dev-main"
 ```
 
 Or add:
 
 ```
-"rhladun/yii2-imgopt": "*"
+"rhladun/yii2-imgopt": "dev-main"
 ```
 
 to the`require` section within your `composer.json` config file.
