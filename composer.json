@@ -1,7 +1,7 @@
 {
     "name": "rhladun/yii2-imgopt",
     "version": "2.0.0",
-    "description": "Widget with an auto WebP/AVIF files generation for Yii2 Framework. Generate HTML <picture>/<img> tags or plain CSS style (background-image) for WebP/AVIF formats (with ability create resized copies) and fallback PNG or JPG images. ",
+    "description": "Widget with an auto WebP/AVIF files generation for Yii2 Framework. Generate HTML <picture>/<img> tags or inline CSS style (background-image) for WebP/AVIF formats (with ability create resized copies) and fallback PNG or JPG images. ",
     "type": "yii2-extension",
     "keywords": ["image", "optimization", "yii2", "webp", "avif", "jpg", "jpeg", "png", "generator", "auto resize images", "optimization background images"],
     "license": "Apache-2.0",
