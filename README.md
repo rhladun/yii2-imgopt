@@ -89,6 +89,19 @@ Output `HTML` result will be
 <img src="/images/product/extra.png" srcset="/images/product/webp/extra@576x414.webp 576w,/images/product/webp/extra@768x552.webp 768w,/images/product/webp/extra@992x713.webp 992w,/images/product/webp/extra.webp" alt="Extra product">  
 ```
 
+If browser not support WebP/AVIF formats (these are mostly old internet browsers), will be output original PNG/JPG file.
+
+In case you need to display a background image through css inline style, use:
+
+```html
+<div class="some-class" style="<?= \rhladun\ImgOpt\ImgOpt::widget(["src" => "/images/product/extra.png",  "type_src"=>"background_webp"]) ?>"></div>   
+```
+
+Output HTML result will be
+
+```html
+<div class="some-class" style="background-image: image-set(url(/images/product/webp/extra.webp') type('image/webp'), url('/images/product/extra.png'))"></div>   
+```
 
 ## Image lazy-loading
 
