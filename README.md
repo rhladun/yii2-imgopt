@@ -1,4 +1,4 @@
-# Image widget with an auto WebP/AVIF file generation for Yii2 Framework with resizing for different HTML tags.
+# Widget with an auto WebP/AVIF file generation for Yii2 Framework with resizing for different HTML tags.
 
 **ImgOpt** is an image optimization widget for [Yii2 Framework](https://www.yiiframework.com) with auto [WebP](https://developers.google.com/speed/webp) & [AVIF](https://caniuse.com/avif) image formats generation from `PNG` and `JPG` files.
 
